@@ -43,7 +43,7 @@ interface Props {
   };
 }
 
-export const FormMissions: React.FC<Props> = (props) => {
+export const FormMissions: React.FC<any> = (props) => {
   const [price, setPrice] = useState(0);
   const [email, setEmail] = useState<string>("");
   const [nick, setNick] = useState("");
@@ -141,8 +141,8 @@ export const FormMissions: React.FC<Props> = (props) => {
           <TabPanels>
             <TabPanel p={0}>
               <NationTab
-                required={props.requiredTanks.Unia}
-                missions={props.missions.Unia}
+                required={props.requiredTanks[0]}
+                missions={props.missions[0]}
                 price={price}
                 setPrice={setPrice}
                 selectedMissions={selectedMissions}
@@ -152,8 +152,8 @@ export const FormMissions: React.FC<Props> = (props) => {
 
             <TabPanel p={0}>
               <NationTab
-                required={props.requiredTanks.Blok}
-                missions={props.missions.Blok}
+                required={props.requiredTanks[1]}
+                missions={props.missions[1]}
                 price={price}
                 setPrice={setPrice}
                 selectedMissions={selectedMissions}
@@ -163,8 +163,8 @@ export const FormMissions: React.FC<Props> = (props) => {
 
             <TabPanel p={0}>
               <NationTab
-                required={props.requiredTanks.Alianci}
-                missions={props.missions.Alianci}
+                required={props.requiredTanks[2]}
+                missions={props.missions[2]}
                 price={price}
                 setPrice={setPrice}
                 selectedMissions={selectedMissions}
@@ -174,8 +174,8 @@ export const FormMissions: React.FC<Props> = (props) => {
 
             <TabPanel p={0}>
               <NationTab
-                required={props.requiredTanks.Koalicja}
-                missions={props.missions.Koalicja}
+                required={props.requiredTanks[3]}
+                missions={props.missions[3]}
                 price={price}
                 setPrice={setPrice}
                 selectedMissions={selectedMissions}

@@ -13,7 +13,7 @@ interface Props {
   setSelectedMissions: (selectedMissions: string[]) => void;
 }
 
-export const NationTab: React.FC<Props> = (props) => {
+export const NationTab: React.FC<any> = (props) => {
   const initialChecked = new Array(15).fill(false);
   const [checked, setChecked] = useState(initialChecked);
 
@@ -29,7 +29,7 @@ export const NationTab: React.FC<Props> = (props) => {
     } else {
       props.setPrice(props.price - mission.price);
       newSelected = props.selectedMissions.filter(
-        (item) => item !== mission.name + " | " + mission.price
+        (item: any) => item !== mission.name + " | " + mission.price
       );
       props.setSelectedMissions(newSelected);
     }
@@ -44,31 +44,31 @@ export const NationTab: React.FC<Props> = (props) => {
     >
       Upewnij się, że posiadasz przynajmniej jeden czołg danego typu:
       <Box mt={3}>
-        {props.required.light.map((tank: string) => (
-          <Tag fontSize=".8rem" mr={1} mt={1} key={tank} colorScheme="whatsapp">
-            {tank}
+        {props.required.lights.map((tank: any) => (
+          <Tag fontSize=".8rem" mr={1} mt={1} key={tank.name} colorScheme="whatsapp">
+            {tank.name}
           </Tag>
         ))}
       </Box>
       <Box mt={3}>
-        {props.required.heavy.map((tank: string) => (
-          <Tag fontSize=".8rem" mr={1} mt={1} key={tank} colorScheme="blue">
-            {tank}
+        {props.required.heavies.map((tank: any) => (
+          <Tag fontSize=".8rem" mr={1} mt={1} key={tank.name} colorScheme="blue">
+            {tank.name}
           </Tag>
         ))}
       </Box>
       <Box mt={3}>
-        {props.required.medium.map((tank: string) => (
-          <Tag fontSize=".8rem" mr={1} mt={1} key={tank} colorScheme="yellow">
-            {tank}
+        {props.required.mediums.map((tank: any) => (
+          <Tag fontSize=".8rem" mr={1} mt={1} key={tank.name} colorScheme="yellow">
+            {tank.name}
           </Tag>
         ))}
       </Box>
       {props.required.arty && (
         <Box mt={3}>
-          {props.required.arty.map((tank: string) => (
-            <Tag fontSize=".8rem" mr={1} mt={1} key={tank} colorScheme="red">
-              {tank}
+          {props.required.arty.map((tank: any) => (
+            <Tag fontSize=".8rem" mr={1} mt={1} key={tank.name} colorScheme="red">
+              {tank.name}
             </Tag>
           ))}
         </Box>
@@ -80,7 +80,7 @@ export const NationTab: React.FC<Props> = (props) => {
         mt={5}
         gridTemplateColumns={{ base: "1fr 1fr", md: "1fr 1fr 1fr" }}
       >
-        {props.missions.map((mission: NationMissionsList, index) => (
+        {props.missions.missions.map((mission: any, index: any) => (
           <CheckboxGroup key={mission.name}>
             <Button
               borderColor="gray.300"
