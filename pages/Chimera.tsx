@@ -9,14 +9,14 @@ import { Props } from "framer-motion/types/types";
 
 export async function getStaticProps() {
   const response = await axios.get(
-    `https://cloud-tank-server.herokuapp.com/object-279-s`
+    `https://cloud-tank-server.herokuapp.com/chimeras`
   );
 
   const data = await response.data[0];
   return { props: { data } };
 }
 
-export const Obiekt279e: React.FC<Props> = ({ data }) => {
+export const Chimera: React.FC<Props> = ({ data }) => {
   return (
     <Box
       p={3}
@@ -41,7 +41,7 @@ export const Obiekt279e: React.FC<Props> = ({ data }) => {
       <FormMissions
         requiredTanks={data.requiredTanks}
         missions={data.Missions}
-        tankName="Obiekt279"
+        tankName="Chimera"
       />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
       <Footer />
@@ -49,4 +49,4 @@ export const Obiekt279e: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default Obiekt279e;
+export default Chimera;

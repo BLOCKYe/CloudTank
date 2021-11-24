@@ -60,6 +60,7 @@ export const FormMissions: React.FC<Props> = (props) => {
         message: message,
         missions: selectedMissions,
         price: price,
+        tank: props.tankName,
       };
 
       setEmail("");

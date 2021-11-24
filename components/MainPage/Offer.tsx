@@ -9,7 +9,7 @@ export const Offer: React.FC = () => {
       title: "Obiekt 279e",
       label: "Misje osobiste",
       color: "blue",
-      desc: " Realizowanie misji osobistych z drugiego frontu na czołg Ob. 279e",
+      desc: "Realizowanie misji osobistych z drugiego frontu na czołg Ob. 279e",
       component: "/Obiekt279e",
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/279.jpg?alt=media&token=c7a45d7c-e869-4a1e-b695-e3dc4c3499b6",
@@ -53,6 +53,24 @@ export const Offer: React.FC = () => {
       desc: "Realizowanie misji osobistych z pierwszego frontu na niemiecki czołg Stug IV",
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/stug.jpg?alt=media&token=c3b36328-979b-463b-af5c-3e4efe576c21",
+    },
+    {
+      title: "Chimera",
+      label: "Misje osobiste",
+      color: "blue",
+      desc: "Realizowanie misji osobistych z drugiego frontu na czołg Chimera",
+      component: "/Chimera",
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/chimera.jpg?alt=media&token=643dbdae-b53c-4207-9cc4-a0f574289747",
+    },
+    {
+      title: "Excalibur",
+      label: "Misje osobiste",
+      color: "blue",
+      desc: "Realizowanie misji osobistych z drugiego frontu na czołg Excalibur",
+      component: "/Excalibur",
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/excalibur.jpg?alt=media&token=2406c751-ad89-4d97-9240-31cfcd979b64",
     },
   ];
   return (
@@ -204,7 +222,7 @@ export const Offer: React.FC = () => {
               gridTemplateColumns={{
                 base: "1fr",
                 md: "1fr 1fr",
-                xl: "1fr 1fr 1fr 1fr",
+                xl: "1fr 1fr 1fr",
               }}
             >
               <OfferItem
@@ -213,27 +231,23 @@ export const Offer: React.FC = () => {
                 image={Offers[0].image}
                 desc={Offers[0].desc}
                 color={Offers[0].color}
+                component={Offers[0].component}
               />
               <OfferItem
-                title={Offers[0].title}
-                label={Offers[0].label}
-                image={Offers[0].image}
-                desc={Offers[0].desc}
-                color={Offers[0].color}
+                title={Offers[6].title}
+                label={Offers[6].label}
+                image={Offers[6].image}
+                desc={Offers[6].desc}
+                color={Offers[6].color}
+                component={Offers[6].component}
               />
               <OfferItem
-                title={Offers[0].title}
-                label={Offers[0].label}
-                image={Offers[0].image}
-                desc={Offers[0].desc}
-                color={Offers[0].color}
-              />
-              <OfferItem
-                title={Offers[0].title}
-                label={Offers[0].label}
-                image={Offers[0].image}
-                desc={Offers[0].desc}
-                color={Offers[0].color}
+                title={Offers[7].title}
+                label={Offers[7].label}
+                image={Offers[7].image}
+                desc={Offers[7].desc}
+                color={Offers[7].color}
+                component={Offers[7].component}
               />
             </Box>
           </TabPanel>
