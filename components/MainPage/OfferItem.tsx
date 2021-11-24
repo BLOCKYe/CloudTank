@@ -12,9 +12,13 @@ interface Props {
 
 export const OfferItem: React.FC<Props> = (props) => {
   return (
-    <Link _focus={{outline: "none"}} target="_blank" style={{ textDecoration: "none" }} href={props.component}>
+    <Link
+      _focus={{ outline: "none" }}
+      target="_blank"
+      style={{ textDecoration: "none" }}
+      href={props.component}
+    >
       <Box
-        centerContent
         borderRadius="xl"
         mt={5}
         m={{ md: 3 }}

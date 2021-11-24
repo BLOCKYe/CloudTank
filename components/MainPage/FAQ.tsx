@@ -10,7 +10,7 @@ import React from "react";
 
 export const FAQ: React.FC = () => {
   return (
-    <Box maxW="6xl" display="grid" placeItems="center" mt={{ base: 12, xl: 24 }} centerContent>
+    <Box maxW="6xl" display="grid" placeItems="center" mt={{ base: 12, xl: 24 }}>
       <SimpleGrid placeItems="center" columns={{ base: 1, xl: 2 }} spacing={10}>
         <Container textAlign="center" mt={5} centerContent>
           <Text fontSize="xl" fontWeight="bold">

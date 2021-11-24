@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/layout";
 import { Tab } from "@chakra-ui/tabs";
 import React from "react";
 

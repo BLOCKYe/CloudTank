@@ -15,35 +15,9 @@ import { FaPaperPlane } from "react-icons/fa";
 import { NationTab } from "./NationTab";
 import { NationTabList } from "./NationTabList";
 import axios from "axios";
+import { Props } from "framer-motion/types/types";
 
-export interface Nation {
-  heavy: string[];
-  light: string[];
-  medium: string[];
-  arty: string[];
-}
-
-export interface NationMissionsList {
-  name: string;
-  price: number;
-}
-
-interface Props {
-  requiredTanks: {
-    Unia: Nation;
-    Blok: Nation;
-    Koalicja: Nation;
-    Alianci: Nation;
-  };
-  missions: {
-    Unia: NationMissionsList[];
-    Blok: NationMissionsList[];
-    Koalicja: NationMissionsList[];
-    Alianci: NationMissionsList[];
-  };
-}
-
-export const FormMissions: React.FC<any> = (props) => {
+export const FormMissions: React.FC<Props> = (props) => {
   const [price, setPrice] = useState(0);
   const [email, setEmail] = useState<string>("");
   const [nick, setNick] = useState("");

@@ -20,7 +20,7 @@ export const SubpageHeader: React.FC<Props> = (props) => {
       columns={{ base: 1, md: 2 }}
     >
       <Container centerContent>
-        <Image maxW="300px" borderRadius="xl" src={`https://cloud-tank-server.herokuapp.com${props.image}`} />
+        <Image maxW="300px" borderRadius="xl" src={props.image} />
         <Text fontSize="xl" mt={5}>
           {props.title}
         </Text>

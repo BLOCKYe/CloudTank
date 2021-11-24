@@ -38,7 +38,7 @@ export const Navbar: React.FC = () => {
           />
         </Link>
 
-        <Menu>
+        <Menu id="test">
           <MenuButton
             _focus={{ outline: "none" }}
             maxW="30px"
@@ -54,10 +54,10 @@ export const Navbar: React.FC = () => {
             bg="gray.100"
             boxShadow="rgba(17, 12, 46, 0.15) 0px 48px 100px 0px"
           >
-            <MenuItem icon={<MdLocalOffer />}>Nasza oferta</MenuItem>
-            <MenuItem icon={<FaQuestion />}>FAQ</MenuItem>
-            <MenuItem icon={<FaPaperPlane />}>Kontakt</MenuItem>
-            <MenuItem icon={<FaHeart />}>Opinie</MenuItem>
+            <MenuItem id="1" icon={<MdLocalOffer />}>Nasza oferta</MenuItem>
+            <MenuItem id="2" icon={<FaQuestion />}>FAQ</MenuItem>
+            <MenuItem id="3" icon={<FaPaperPlane />}>Kontakt</MenuItem>
+            <MenuItem id="4" icon={<FaHeart />}>Opinie</MenuItem>
           </MenuList>
         </Menu>
       </Box>

@@ -5,8 +5,9 @@ import { Footer } from "../components/Footer";
 import { SubpageHeader } from "../components/Subpages/SubpageHeader";
 import { FormMissions } from "../components/Subpages/FormMissions";
 import axios from "axios";
+import { Props } from "framer-motion/types/types";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const response = await axios.get(
     `https://cloud-tank-server.herokuapp.com/object-279-s`
   );
@@ -15,7 +16,7 @@ export async function getServerSideProps() {
   return { props: { data } };
 }
 
-export const Obiekt279e: React.FC<any> = ({ data }) => {
+export const Obiekt279e: React.FC<Props> = ({ data }) => {
   return (
     <Box
       p={3}
@@ -33,7 +34,7 @@ export const Obiekt279e: React.FC<any> = ({ data }) => {
         title={data.header.title}
         desc={data.header.description}
         label={data.header.label}
-        image={data.header.image.url}
+        image={data.header.image}
         req={data.header.requirements}
       />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />

@@ -2,22 +2,22 @@ import { CheckboxGroup, Checkbox } from "@chakra-ui/checkbox";
 import { Box, Divider } from "@chakra-ui/layout";
 import { Tag, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Nation, NationMissionsList } from "./FormMissions";
+import { MissionElement, Mission, RequiredTank } from "../../types";
 
 interface Props {
-  required: Nation;
-  missions: NationMissionsList[];
+  required: RequiredTank;
+  missions: Mission;
   price: number;
   setPrice: (price: number) => void;
   selectedMissions: string[];
   setSelectedMissions: (selectedMissions: string[]) => void;
 }
 
-export const NationTab: React.FC<any> = (props) => {
+export const NationTab: React.FC<Props> = (props) => {
   const initialChecked = new Array(15).fill(false);
   const [checked, setChecked] = useState(initialChecked);
 
-  const handleCheck = (mission: NationMissionsList, index: number) => {
+  const handleCheck = (mission: MissionElement, index: number) => {
     let newChecked = checked;
     newChecked[index] = !checked[index];
     setChecked(newChecked);
@@ -29,7 +29,7 @@ export const NationTab: React.FC<any> = (props) => {
     } else {
       props.setPrice(props.price - mission.price);
       newSelected = props.selectedMissions.filter(
-        (item: any) => item !== mission.name + " | " + mission.price
+        (item: string) => item !== mission.name + " | " + mission.price
       );
       props.setSelectedMissions(newSelected);
     }
@@ -44,30 +44,54 @@ export const NationTab: React.FC<any> = (props) => {
     >
       Upewnij się, że posiadasz przynajmniej jeden czołg danego typu:
       <Box mt={3}>
-        {props.required.lights.map((tank: any) => (
-          <Tag fontSize=".8rem" mr={1} mt={1} key={tank.name} colorScheme="whatsapp">
+        {props.required.lights.map((tank: MissionElement) => (
+          <Tag
+            fontSize=".8rem"
+            mr={1}
+            mt={1}
+            key={tank.name}
+            colorScheme="whatsapp"
+          >
             {tank.name}
           </Tag>
         ))}
       </Box>
       <Box mt={3}>
-        {props.required.heavies.map((tank: any) => (
-          <Tag fontSize=".8rem" mr={1} mt={1} key={tank.name} colorScheme="blue">
+        {props.required.heavies.map((tank: MissionElement) => (
+          <Tag
+            fontSize=".8rem"
+            mr={1}
+            mt={1}
+            key={tank.name}
+            colorScheme="blue"
+          >
             {tank.name}
           </Tag>
         ))}
       </Box>
       <Box mt={3}>
-        {props.required.mediums.map((tank: any) => (
-          <Tag fontSize=".8rem" mr={1} mt={1} key={tank.name} colorScheme="yellow">
+        {props.required.mediums.map((tank: MissionElement) => (
+          <Tag
+            fontSize=".8rem"
+            mr={1}
+            mt={1}
+            key={tank.name}
+            colorScheme="yellow"
+          >
             {tank.name}
           </Tag>
         ))}
       </Box>
       {props.required.arty && (
         <Box mt={3}>
-          {props.required.arty.map((tank: any) => (
-            <Tag fontSize=".8rem" mr={1} mt={1} key={tank.name} colorScheme="red">
+          {props.required.arty.map((tank: MissionElement) => (
+            <Tag
+              fontSize=".8rem"
+              mr={1}
+              mt={1}
+              key={tank.name}
+              colorScheme="red"
+            >
               {tank.name}
             </Tag>
           ))}
@@ -80,7 +104,7 @@ export const NationTab: React.FC<any> = (props) => {
         mt={5}
         gridTemplateColumns={{ base: "1fr 1fr", md: "1fr 1fr 1fr" }}
       >
-        {props.missions.missions.map((mission: any, index: any) => (
+        {props.missions.missions.map((mission: MissionElement, index) => (
           <CheckboxGroup key={mission.name}>
             <Button
               borderColor="gray.300"
