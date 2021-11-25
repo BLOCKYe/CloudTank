@@ -6,6 +6,7 @@ import { SubpageHeader } from "../components/Subpages/SubpageHeader";
 import { FormMissions } from "../components/Subpages/FormMissions";
 import axios from "axios";
 import { Props } from "../types";
+import Head from "next/dist/shared/lib/head";
 
 export async function getStaticProps() {
   const response = await axios.get(
@@ -28,6 +29,11 @@ export const Chimera: React.FC<Props> = ({ data }) => {
       alignItems="center"
       bg="gray.100"
     >
+       <Head>
+        <title>CloudTank - Misje Chimera</title>
+        <meta name="description" content="World of tanks boosting" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Navbar />
       <SubpageHeader
         color={data.header.color}

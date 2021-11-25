@@ -3,21 +3,21 @@ import React from "react";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { SubpageHeader } from "../components/Subpages/SubpageHeader";
-import { FormMissions } from "../components/Subpages/FormMissions";
+import { FormMissionsExtended } from "../components/Subpages/FormMissionsExtended";
 import axios from "axios";
 import { Props } from "../types";
 import Head from "next/head";
 
 export async function getStaticProps() {
   const response = await axios.get(
-    `https://cloud-tank-server.herokuapp.com/object-279-s`
+    `https://cloud-tank-server.herokuapp.com/stug-ivs`
   );
 
   const data = await response.data[0];
   return { props: { data } };
 }
 
-export const Obiekt279e: React.FC<Props> = ({ data }) => {
+export const StugIV: React.FC<Props> = ({ data }) => {
   return (
     <Box
       p={3}
@@ -30,7 +30,7 @@ export const Obiekt279e: React.FC<Props> = ({ data }) => {
       bg="gray.100"
     >
       <Head>
-        <title>CloudTank - Misje Objekt 279e</title>
+        <title>CloudTank - Misje Stug IV</title>
         <meta name="description" content="World of tanks boosting" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -44,10 +44,10 @@ export const Obiekt279e: React.FC<Props> = ({ data }) => {
         req={data.header.requirements}
       />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
-      <FormMissions
+      <FormMissionsExtended
         requiredTanks={data.requiredTanks}
         missions={data.Missions}
-        tankName="Obiekt279"
+        tankName="StugIV"
       />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
       <Footer />
@@ -55,4 +55,4 @@ export const Obiekt279e: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default Obiekt279e;
+export default StugIV;

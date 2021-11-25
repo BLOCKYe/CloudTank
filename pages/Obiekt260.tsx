@@ -3,9 +3,10 @@ import React from "react";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { SubpageHeader } from "../components/Subpages/SubpageHeader";
-import { FormMissions } from "../components/Subpages/FormMissions";
+import { FormMissionsExtended } from "../components/Subpages/FormMissionsExtended";
 import axios from "axios";
 import { Props } from "../types";
+import Head from "next/head";
 
 export async function getStaticProps() {
   const response = await axios.get(
@@ -16,7 +17,7 @@ export async function getStaticProps() {
   return { props: { data } };
 }
 
-export const Obiekt279e: React.FC<Props> = ({ data }) => {
+export const Obiekt260: React.FC<Props> = ({ data }) => {
   return (
     <Box
       p={3}
@@ -28,6 +29,11 @@ export const Obiekt279e: React.FC<Props> = ({ data }) => {
       alignItems="center"
       bg="gray.100"
     >
+      <Head>
+        <title>CloudTank - Misje Objekt 260</title>
+        <meta name="description" content="World of tanks boosting" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Navbar />
       <SubpageHeader
         color={data.header.color}
@@ -38,15 +44,15 @@ export const Obiekt279e: React.FC<Props> = ({ data }) => {
         req={data.header.requirements}
       />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
-      {/* <FormMissions
+      <FormMissionsExtended
         requiredTanks={data.requiredTanks}
         missions={data.Missions}
-        tankName="Obiekt279"
-      /> */}
+        tankName="Obiekt260"
+      />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
       <Footer />
     </Box>
   );
 };
 
-export default Obiekt279e;
+export default Obiekt260;

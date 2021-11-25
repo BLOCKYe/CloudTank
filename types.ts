@@ -49,6 +49,7 @@ export interface RequiredTank {
   mediums: MissionElement[];
   heavies: MissionElement[];
   arty: MissionElement[];
+  tankName: MissionElement[];
   __v: number;
   id: string;
 }

@@ -36,6 +36,7 @@ export const Offer: React.FC = () => {
       label: "Misje osobiste",
       color: "blue",
       desc: "Realizowanie misji osobistych z pierwszego frontu na niemiecki czołg T55A",
+      component: "/T55A",
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/t55.jpg?alt=media&token=2f6319a5-ec6a-4184-8d32-463910a208a7",
     },
@@ -44,6 +45,7 @@ export const Offer: React.FC = () => {
       label: "Misje osobiste",
       color: "blue",
       desc: "Realizowanie misji osobistych z pierwszego frontu na czołg T28 Concept",
+      component: "/T28Concept",
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/t28.jpg?alt=media&token=91c923ba-4a05-4101-84d5-ece7185106d4",
     },
@@ -52,6 +54,7 @@ export const Offer: React.FC = () => {
       label: "Misje osobiste",
       color: "blue",
       desc: "Realizowanie misji osobistych z pierwszego frontu na niemiecki czołg Stug IV",
+      component: "/StugIV",
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/stug.jpg?alt=media&token=c3b36328-979b-463b-af5c-3e4efe576c21",
     },
@@ -190,6 +193,7 @@ export const Offer: React.FC = () => {
                 image={Offers[3].image}
                 desc={Offers[3].desc}
                 color={Offers[3].color}
+                component={Offers[3].component}
               />
               <OfferItem
                 title={Offers[4].title}
@@ -197,6 +201,7 @@ export const Offer: React.FC = () => {
                 image={Offers[4].image}
                 desc={Offers[4].desc}
                 color={Offers[4].color}
+                component={Offers[4].component}
               />
               <OfferItem
                 title={Offers[5].title}
@@ -204,6 +209,7 @@ export const Offer: React.FC = () => {
                 image={Offers[5].image}
                 desc={Offers[5].desc}
                 color={Offers[5].color}
+                component={Offers[5].component}
               />
             </Box>
           </TabPanel>
