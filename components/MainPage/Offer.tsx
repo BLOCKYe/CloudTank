@@ -19,6 +19,7 @@ export const Offer: React.FC = () => {
       label: "Misje osobiste",
       color: "blue",
       desc: "Realizowanie misji osobistych z pierwszego frontu na czołg Ob. 260",
+      component: "/Obiekt260",
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/260.jpg?alt=media&token=7fa2a459-16c0-44db-8156-e2677a7f2691",
     },
@@ -104,6 +105,7 @@ export const Offer: React.FC = () => {
           image={Offers[1].image}
           desc={Offers[1].desc}
           color={Offers[1].color}
+          component={Offers[1].component}
         />
         <OfferItem
           title={Offers[2].title}
@@ -180,6 +182,7 @@ export const Offer: React.FC = () => {
                 image={Offers[1].image}
                 desc={Offers[1].desc}
                 color={Offers[1].color}
+                component={Offers[1].component}
               />
               <OfferItem
                 title={Offers[3].title}

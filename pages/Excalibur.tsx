@@ -5,7 +5,8 @@ import { Footer } from "../components/Footer";
 import { SubpageHeader } from "../components/Subpages/SubpageHeader";
 import { FormMissions } from "../components/Subpages/FormMissions";
 import axios from "axios";
-import { Props } from "framer-motion/types/types";
+import { Props } from "../types";
+
 
 export async function getStaticProps() {
   const response = await axios.get(

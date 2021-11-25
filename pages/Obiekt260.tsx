@@ -9,14 +9,14 @@ import { Props } from "../types";
 
 export async function getStaticProps() {
   const response = await axios.get(
-    `https://cloud-tank-server.herokuapp.com/chimeras`
+    `https://cloud-tank-server.herokuapp.com/object-260-s`
   );
 
   const data = await response.data[0];
   return { props: { data } };
 }
 
-export const Chimera: React.FC<Props> = ({ data }) => {
+export const Obiekt279e: React.FC<Props> = ({ data }) => {
   return (
     <Box
       p={3}
@@ -38,15 +38,15 @@ export const Chimera: React.FC<Props> = ({ data }) => {
         req={data.header.requirements}
       />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
-      <FormMissions
+      {/* <FormMissions
         requiredTanks={data.requiredTanks}
         missions={data.Missions}
-        tankName="Chimera"
-      />
+        tankName="Obiekt279"
+      /> */}
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
       <Footer />
     </Box>
   );
 };
 
-export default Chimera;
+export default Obiekt279e;

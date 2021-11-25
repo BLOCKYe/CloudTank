@@ -15,9 +15,15 @@ import { FaPaperPlane } from "react-icons/fa";
 import { NationTab } from "./NationTab";
 import { NationTabList } from "./NationTabList";
 import axios from "axios";
-import { Props } from "framer-motion/types/types";
+import { Mission, RequiredTank } from "../../types";
 
-export const FormMissions: React.FC<Props> = (props) => {
+interface FormMissionsProps {
+  tankName: string;
+  requiredTanks: RequiredTank[];
+  missions: Mission[];
+}
+
+export const FormMissions: React.FC<FormMissionsProps> = (props) => {
   const [price, setPrice] = useState(0);
   const [email, setEmail] = useState<string>("");
   const [nick, setNick] = useState("");
