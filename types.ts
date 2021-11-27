@@ -53,3 +53,42 @@ export interface RequiredTank {
   __v: number;
   id: string;
 }
+
+export interface Promotion {
+  color?: string;
+  _id?: string;
+  title?: string;
+  description?: string;
+  label?: string;
+  published_at?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
+  __v?: number;
+  id?: string;
+}
+
+export interface Feedback {
+  _id?: string;
+  name: string;
+  content: string;
+  rating: number;
+  date?: Date;
+  published_at?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
+  __v?: number;
+  id?: string;
+}
+
+export interface FAQs {
+  _id?: string;
+  title?: string;
+  content?: string;
+  published_at?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
+  __v?: number;
+  id?: string;
+  index: number;
+  items?: number;
+}

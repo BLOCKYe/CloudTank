@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
         </Button>
       </ButtonGroup>
       <Text mt={5} mb={5} textAlign="center" fontSize=".8rem">
-        Copyright © CloudTank 2021 {"</>"} Created by Dominik Obłoza.
+        Copyright © CloudTank 2021
       </Text>
     </Container>
   );

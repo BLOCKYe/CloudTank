@@ -10,7 +10,7 @@ interface Props {
 export const Header: React.FC<Props> = (props) => {
   return (
     <Box display="grid" placeItems={{ base: "center", xl: "unset" }} mt={12}>
-      <Heading>CloudTank</Heading>
+      <Heading>CLOUDTANK</Heading>
       <Text color="gray.600">World of tanks boosting</Text>
       {props.isDescription && (
         <Container
@@ -38,6 +38,13 @@ export const Header: React.FC<Props> = (props) => {
             colorScheme="purple"
             variant="outline"
             _focus={{ outline: "none" }}
+            onClick={() =>
+              window.scrollTo({
+                left: 0,
+                top: 530,
+                behavior: "smooth",
+              })
+            }
           >
             Poznaj ofertę
           </Button>

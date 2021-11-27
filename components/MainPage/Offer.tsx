@@ -225,6 +225,7 @@ export const Offer: React.FC = () => {
             <Box
               w="100%"
               p={0}
+              maxW="4xl"
               mt={5}
               display="grid"
               placeItems="center"
@@ -273,33 +274,13 @@ export const Offer: React.FC = () => {
               mt={5}
               display="grid"
               placeItems="center"
+              maxW="4xl"
               gridTemplateColumns={{
                 base: "1fr",
                 md: "1fr 1fr",
-                xl: "1fr 1fr 1fr 1fr",
+                xl: "1fr 1fr 1fr",
               }}
             >
-              <OfferItem
-                title={Offers[2].title}
-                label={Offers[2].label}
-                image={Offers[2].image}
-                desc={Offers[2].desc}
-                color={Offers[2].color}
-              />
-              <OfferItem
-                title={Offers[2].title}
-                label={Offers[2].label}
-                image={Offers[2].image}
-                desc={Offers[2].desc}
-                color={Offers[2].color}
-              />
-              <OfferItem
-                title={Offers[2].title}
-                label={Offers[2].label}
-                image={Offers[2].image}
-                desc={Offers[2].desc}
-                color={Offers[2].color}
-              />
               <OfferItem
                 title={Offers[2].title}
                 label={Offers[2].label}
