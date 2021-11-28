@@ -92,3 +92,23 @@ export interface FAQs {
   index: number;
   items?: number;
 }
+
+export interface Wn8 {
+  _id: string;
+  published_at: Date;
+  header: Header;
+  prices: Prices;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+  id: string;
+}
+
+export interface Prices {
+  _id?: string;
+  Standard: number;
+  High: number;
+  Extreme: number;
+  __v?: number;
+  id?: string;
+}

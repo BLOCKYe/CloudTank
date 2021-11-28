@@ -27,7 +27,7 @@ export const Offer: React.FC = () => {
       title: "Biegłość",
       label: "Odznaki biegłości",
       color: "yellow",
-      desc: "Podnoszenie procentów biegłości, usługa obejmuje wbijanie nawet III odznaki",
+      desc: "Zdobywanie odznak biegłości, podnoszenie % biegłości.",
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/3moe.jpg?alt=media&token=52e58608-afc7-467c-a988-3aa4f803f8db",
     },
@@ -75,6 +75,15 @@ export const Offer: React.FC = () => {
       component: "/Excalibur",
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/excalibur.jpg?alt=media&token=2406c751-ad89-4d97-9240-31cfcd979b64",
+    },
+    {
+      title: "WN8",
+      label: "BOOSTING",
+      color: "red",
+      desc: "Podnoszenie statystyk WN8, oceny osobistej oraz średnich uszkodzeń.",
+      component: "/WN8",
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/wn8.jpg?alt=media&token=cf6c4d3b-56bf-45e7-a649-fe89e51f74cb",
     },
   ];
   return (
@@ -287,6 +296,14 @@ export const Offer: React.FC = () => {
                 image={Offers[2].image}
                 desc={Offers[2].desc}
                 color={Offers[2].color}
+              />
+               <OfferItem
+                title={Offers[8].title}
+                label={Offers[8].label}
+                image={Offers[8].image}
+                desc={Offers[8].desc}
+                color={Offers[8].color}
+                component={Offers[8].component}
               />
             </Box>
           </TabPanel>
