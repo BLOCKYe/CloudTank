@@ -16,8 +16,16 @@ export const FAQ: React.FC<Props> = (props) => {
       mt={{ base: 12, xl: 24 }}
     >
       <SimpleGrid placeItems="center" columns={{ base: 1, xl: 2 }} spacing={14}>
-        {props.data.map((element, index) => (<Box>
-          <FAQIteam items={props.data.length} index={index} key={element.id} title={element.title} content={element.content} /></Box>
+        {props.data.map((element, index) => (
+          <Box key={element.id}>
+            <FAQIteam
+              items={props.data.length}
+              index={index}
+              key={element.id}
+              title={element.title}
+              content={element.content}
+            />
+          </Box>
         ))}
       </SimpleGrid>
     </Box>
