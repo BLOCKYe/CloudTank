@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Container, Heading, Text } from "@chakra-ui/layout";
+import { Box, Heading, Text } from "@chakra-ui/layout";
 import { OfferItem } from "./OfferItem";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 
 export const Offer: React.FC = () => {
+
   const Offers = [
     {
       title: "Obiekt 279e",
@@ -26,8 +27,9 @@ export const Offer: React.FC = () => {
     {
       title: "Biegłość",
       label: "Odznaki biegłości",
-      color: "yellow",
+      color: "green",
       desc: "Zdobywanie odznak biegłości, podnoszenie % biegłości.",
+      component: "/Moe",
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/3moe.jpg?alt=media&token=52e58608-afc7-467c-a988-3aa4f803f8db",
     },
@@ -125,6 +127,7 @@ export const Offer: React.FC = () => {
           image={Offers[2].image}
           desc={Offers[2].desc}
           color={Offers[2].color}
+          component={Offers[2].component}
         />
       </Box>
 
@@ -296,8 +299,9 @@ export const Offer: React.FC = () => {
                 image={Offers[2].image}
                 desc={Offers[2].desc}
                 color={Offers[2].color}
+                component={Offers[2].component}
               />
-               <OfferItem
+              <OfferItem
                 title={Offers[8].title}
                 label={Offers[8].label}
                 image={Offers[8].image}

@@ -112,3 +112,32 @@ export interface Prices {
   __v?: number;
   id?: string;
 }
+
+export interface TankList {
+  status?: string;
+  meta?: Meta;
+  data?: { [key: string]: Datum };
+}
+
+export interface Datum {
+  tier?: number;
+  name?: string;
+}
+
+export interface Meta {
+  count?: number;
+  page_total?: number;
+  total?: number;
+  limit?: number;
+  page?: null;
+}
+
+export interface MoeType {
+  _id?: string;
+  published_at?: Date;
+  header: Header;
+  createdAt?: Date;
+  updatedAt?: Date;
+  __v?: number;
+  id?: string;
+}
