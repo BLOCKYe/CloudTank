@@ -14,8 +14,8 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
-import axios from "axios";
 import { Datum } from "../../types";
+import { fetchNickname, fetchTanks } from "../../helpers/FetchHelpers";
 
 interface Props {
   tankName: string;
@@ -34,20 +34,25 @@ export const FormMoe: React.FC<Props> = (props) => {
   const [tankList, setTankList] = useState<Datum[]>([]);
   const [maxActualMoePercent, setMaxActualMoePercent] = useState<number>(94);
   const [tankName, setTankName] = useState("");
+  const [isTankListLoading, setisTankListLoading] = useState<boolean>(false);
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
   /** Check nick in Wot database
-   * function will start after 1s after
+   * function will start 1s after
    * stop typing
    */
   const handleNick = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 1) setIsNickCorrect(false);
     setNick(e.target.value);
     clearTimeout(timer);
-    setTimer(setTimeout(() => fetchNickname(e.target.value), 1000));
+    setTimer(
+      setTimeout(async () => {
+        setIsNickCorrect(await fetchNickname(e.target.value));
+      }, 1000)
+    );
   };
 
   const handleTier = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -77,24 +82,13 @@ export const FormMoe: React.FC<Props> = (props) => {
     setPrice(Math.round(newPrice / (10 / newTier)));
   };
 
-  const fetchNickname = async (nickname: string) => {
-    const response = await axios.get(
-      `https://api.worldoftanks.eu/wot/account/list/?application_id=ea5b62e33ac1babf3bc5c621d0dab391&search=${nickname}`
-    );
-    if (response?.data?.meta?.count === 0 || response?.data?.status !== "ok") {
-      setIsNickCorrect(false);
-    } else setIsNickCorrect(true);
-  };
-
-  const fetchTanks = async () => {
-    const response = await axios.get(
-      `https://api.worldoftanks.eu/wot/encyclopedia/vehicles/?application_id=ea5b62e33ac1babf3bc5c621d0dab391&fields=tier%2C+name&tier=${tier}`
-    );
-    setTankList(response?.data?.data);
-  };
-
   useEffect(() => {
-    fetchTanks();
+    const fetch = async () => {
+      setisTankListLoading(true);
+      setTankList(await fetchTanks(tier));
+      setisTankListLoading(false);
+    };
+    fetch();
   }, [tier]);
 
   useEffect(() => {
@@ -146,7 +140,6 @@ export const FormMoe: React.FC<Props> = (props) => {
       setEmail("");
       setNick("");
       setMessage("");
-      setTankName("");
 
       console.log(messageContent);
       alert("Wyslano wiadomosc");
@@ -172,7 +165,8 @@ export const FormMoe: React.FC<Props> = (props) => {
             <Input
               value={nick}
               onChange={handleNick}
-              borderColor="gray.300"
+              borderColor={isNickCorrect && nick.length > 2 ? "green.300" : "gray.300"}
+              borderWidth={isNickCorrect && nick.length > 2 ? 2 : 1}
               type="text"
               placeholder="Twój nick z gry"
               isInvalid={!isNickCorrect}
@@ -192,21 +186,25 @@ export const FormMoe: React.FC<Props> = (props) => {
         </Container>
 
         <Container mt={5} centerContent>
-          <Select
-            value={tankName}
-            onChange={handleTankName}
-            mt={1}
-            isRequired
-            bgColor="gray.200"
-            variant="filled"
-            cursor="pointer"
-          >
-            {Object.entries(tankList).map((e: any) => (
-              <option key={e[1]?.name} value={e[1]?.name}>
-                {e[1]?.name}
-              </option>
-            ))}
-          </Select>
+          {isTankListLoading ? (
+            <Button isLoading />
+          ) : (
+            <Select
+              value={tankName}
+              onChange={handleTankName}
+              mt={1}
+              isRequired
+              bgColor="gray.200"
+              variant="filled"
+              cursor="pointer"
+            >
+              {Object.entries(tankList).map((e: any) => (
+                <option key={e[0]} value={e[1]?.name}>
+                  {e[1]?.name}
+                </option>
+              ))}
+            </Select>
+          )}
         </Container>
 
         <Container mt={12} centerContent>
@@ -214,13 +212,13 @@ export const FormMoe: React.FC<Props> = (props) => {
           <RadioGroup colorScheme="purple" onChange={setTargetMoe} value={targetMoe} p={3} borderRadius="xl">
             <Stack fontWeight="bold" direction="row" spacing={7}>
               <Radio bgColor="gray.200" borderRadius="xl" p={3} cursor="pointer" value="1" borderColor="gray.300">
-                I
+                65%
               </Radio>
               <Radio bgColor="gray.200" borderRadius="xl" p={3} cursor="pointer" borderColor="gray.300" value="2">
-                II
+                85%
               </Radio>
               <Radio bgColor="gray.200" borderRadius="xl" p={3} cursor="pointer" borderColor="gray.300" value="3">
-                III
+                95%
               </Radio>
             </Stack>
           </RadioGroup>

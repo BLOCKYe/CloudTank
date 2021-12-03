@@ -1,18 +1,11 @@
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Box, Container, SimpleGrid } from "@chakra-ui/layout";
-import {
-  Button,
-  Textarea,
-  Slider,
-  SliderFilledTrack,
-  SliderThumb,
-  SliderTrack,
-} from "@chakra-ui/react";
+import { Button, Textarea, Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
-import axios from "axios";
 import { Prices } from "../../types";
+import { fetchNickname } from "../../helpers/FetchHelpers";
 
 interface Props {
   tankName: string;
@@ -37,20 +30,15 @@ export const FormBoosting: React.FC<Props> = (props) => {
     if (e.target.value.length > 1) setIsNickCorrect(false);
     setNick(e.target.value);
     clearTimeout(timer);
-    setTimer(setTimeout(() => fetchNickname(e.target.value), 1000));
+    setTimer(
+      setTimeout(async () => {
+        setIsNickCorrect(await fetchNickname(e.target.value));
+      }, 1000)
+    );
   };
 
   const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
-  };
-
-  const fetchNickname = async (nickname: string) => {
-    const response = await axios.get(
-      `https://api.worldoftanks.eu/wot/account/list/?application_id=ea5b62e33ac1babf3bc5c621d0dab391&search=${nickname}`
-    );
-    if (response?.data?.meta?.count === 0 || response?.data?.status !== "ok") {
-      setIsNickCorrect(false);
-    } else setIsNickCorrect(true);
   };
 
   const submitForm = (e: any) => {
@@ -97,13 +85,7 @@ export const FormBoosting: React.FC<Props> = (props) => {
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
           <FormControl maxW="sm" isRequired>
             <FormLabel>Email</FormLabel>
-            <Input
-              value={email}
-              onChange={handleEmail}
-              borderColor="gray.300"
-              type="email"
-              placeholder="Twój email"
-            />
+            <Input value={email} onChange={handleEmail} borderColor="gray.300" type="email" placeholder="Twój email" />
           </FormControl>
 
           <FormControl mt={{ base: 5, md: 0 }} maxW="sm" isRequired>
@@ -120,14 +102,7 @@ export const FormBoosting: React.FC<Props> = (props) => {
         </SimpleGrid>
 
         <Container mt={12} centerContent>
-          <Container
-            centerContent
-            backgroundColor="gray.200"
-            p={5}
-            pr={7}
-            pl={7}
-            borderRadius="xl"
-          >
+          <Container centerContent backgroundColor="gray.200" p={5} pr={7} pl={7} borderRadius="xl">
             <Box> Wybierz jakość gry </Box>
             <Box fontSize="xl" fontWeight="bold">
               {gameLevel} WN8
@@ -151,14 +126,7 @@ export const FormBoosting: React.FC<Props> = (props) => {
         </Container>
 
         <Container mt={12} centerContent>
-          <Container
-            centerContent
-            backgroundColor="gray.200"
-            p={5}
-            pr={7}
-            pl={7}
-            borderRadius="xl"
-          >
+          <Container centerContent backgroundColor="gray.200" p={5} pr={7} pl={7} borderRadius="xl">
             <Box> Wybierz ilość </Box>
             <Box fontSize="xl" fontWeight="bold">
               {battlesCount} bitew
@@ -192,15 +160,7 @@ export const FormBoosting: React.FC<Props> = (props) => {
           onChange={handleMessage}
         />
 
-        <Box
-          backgroundColor="gray.200"
-          p={5}
-          pr={7}
-          pl={7}
-          borderRadius="xl"
-          fontSize="xl"
-          mt={12}
-        >
+        <Box backgroundColor="gray.200" p={5} pr={7} pl={7} borderRadius="xl" fontSize="xl" mt={12}>
           Szacowana cena: <b style={{ color: "#805AD5" }}>{price}</b> PLN
         </Box>
 

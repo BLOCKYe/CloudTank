@@ -1,21 +1,13 @@
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Box, SimpleGrid } from "@chakra-ui/layout";
-import {
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
-  Button,
-  Textarea,
-} from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels, TabPanel, Button, Textarea } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
 import { NationTab } from "./NationTab";
 import { NationTabList } from "./NationTabList";
-import axios from "axios";
 import { Mission, RequiredTank } from "../../types";
+import { fetchNickname } from "../../helpers/FetchHelpers";
 
 interface FormMissionsProps {
   tankName: string;
@@ -40,20 +32,15 @@ export const FormMissions: React.FC<FormMissionsProps> = (props) => {
     if (e.target.value.length > 1) setIsNickCorrect(false);
     setNick(e.target.value);
     clearTimeout(timer);
-    setTimer(setTimeout(() => fetchNickname(e.target.value), 1000));
+    setTimer(
+      setTimeout(async () => {
+        setIsNickCorrect(await fetchNickname(e.target.value));
+      }, 1000)
+    );
   };
 
   const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
-  };
-
-  const fetchNickname = async (nickname: string) => {
-    const response = await axios.get(
-      `https://api.worldoftanks.eu/wot/account/list/?application_id=ea5b62e33ac1babf3bc5c621d0dab391&search=${nickname}`
-    );
-    if (response?.data?.meta?.count === 0 || response?.data?.status !== "ok") {
-      setIsNickCorrect(false);
-    } else setIsNickCorrect(true);
   };
 
   const submitForm = (e: any) => {
@@ -89,13 +76,7 @@ export const FormMissions: React.FC<FormMissionsProps> = (props) => {
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
           <FormControl maxW="sm" isRequired>
             <FormLabel>Email</FormLabel>
-            <Input
-              value={email}
-              onChange={handleEmail}
-              borderColor="gray.300"
-              type="email"
-              placeholder="Twój email"
-            />
+            <Input value={email} onChange={handleEmail} borderColor="gray.300" type="email" placeholder="Twój email" />
           </FormControl>
 
           <FormControl mt={{ base: 5, md: 0 }} maxW="sm" isRequired>
@@ -177,15 +158,7 @@ export const FormMissions: React.FC<FormMissionsProps> = (props) => {
           onChange={handleMessage}
         />
 
-        <Box
-          backgroundColor="gray.200"
-          p={5}
-          pr={7}
-          pl={7}
-          borderRadius="xl"
-          fontSize="xl"
-          mt={12}
-        >
+        <Box backgroundColor="gray.200" p={5} pr={7} pl={7} borderRadius="xl" fontSize="xl" mt={12}>
           Szacowana cena: <b style={{ color: "#805AD5" }}>{price}</b> PLN
         </Box>
 
