@@ -48,7 +48,7 @@ export const Moe: React.FC<Props> = ({ data }) => {
         req={data.header.requirements}
       />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
-      <FormMoe tankName="Odznaki biegłości" />
+      <FormMoe type="Odznaki biegłości" />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
       <Footer />
     </Box>

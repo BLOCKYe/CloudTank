@@ -48,7 +48,7 @@ export const WN8: React.FC<Props> = ({ data }) => {
         req={data.header.requirements}
       />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
-      <FormBoosting prices={data.prices} tankName="WN8" />
+      <FormBoosting prices={data.prices} type="WN8" />
       <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
       <Footer />
     </Box>

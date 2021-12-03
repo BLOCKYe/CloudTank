@@ -14,31 +14,34 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
-import { Datum } from "../../types";
-import { fetchNickname, fetchTanks } from "../../helpers/FetchHelpers";
+import { createRequest, fetchNickname, fetchTanks } from "../../helpers/FetchHelpers";
+import { useToast } from "@chakra-ui/react";
 
 interface Props {
-  tankName: string;
+  type: string;
 }
 
 export const FormMoe: React.FC<Props> = (props) => {
+  /** Input state */
   const [price, setPrice] = useState(0);
   const [email, setEmail] = useState<string>("");
   const [nick, setNick] = useState("");
   const [message, setMessage] = useState("");
-  const [timer, setTimer] = useState<any>(null);
-  const [isNickCorrect, setIsNickCorrect] = useState<boolean>(true);
   const [tier, setTier] = useState("10");
+  const [tankName, setTankName] = useState<string>("");
   const [actualMoePercent, setactualMoePercent] = useState(10);
   const [targetMoe, setTargetMoe] = useState("1");
-  const [tankList, setTankList] = useState<Datum[]>([]);
-  const [maxActualMoePercent, setMaxActualMoePercent] = useState<number>(94);
-  const [tankName, setTankName] = useState("");
-  const [isTankListLoading, setisTankListLoading] = useState<boolean>(false);
 
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  /** Components controllers */
+  const [isNickCorrect, setIsNickCorrect] = useState<boolean>(true);
+  const [isTankListLoading, setisTankListLoading] = useState<boolean>(false);
+  const [isEmailSending, setisEmailSending] = useState<boolean>(false);
+  const [maxActualMoePercent, setMaxActualMoePercent] = useState<number>(94);
+  const [timer, setTimer] = useState<any>(null);
+
+  /** Other */
+  const [tankList, setTankList] = useState<any>([]);
+  const toast = useToast();
 
   /** Check nick in Wot database
    * function will start 1s after
@@ -55,22 +58,26 @@ export const FormMoe: React.FC<Props> = (props) => {
     );
   };
 
+  /** Basic inputs handlers */
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
   const handleTier = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTier(event.target.value);
   };
-
   const handleTankName = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTankName(event.target.value);
   };
-
   const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
 
+  /** Compute final price */
   const handlePrice = () => {
     let newPrice = 0;
     const x = actualMoePercent;
     const newTier = parseInt(tier);
+
     if (targetMoe === "3") {
       newPrice = -((67 * x * x * x) / 49725) + (887 * x * x) / 6630 - (18679 * x) / 3978 + 460;
     } else if (targetMoe === "2") {
@@ -82,15 +89,22 @@ export const FormMoe: React.FC<Props> = (props) => {
     setPrice(Math.round(newPrice / (10 / newTier)));
   };
 
+  /** Fetch tanks and create
+   * list after select tier
+   */
   useEffect(() => {
     const fetch = async () => {
       setisTankListLoading(true);
-      setTankList(await fetchTanks(tier));
+      const tankList = await fetchTanks(tier);
+      const listArray: any = Object.entries(tankList);
+      setTankList(listArray);
+      setTankName(listArray[0]?.[1]?.name);
       setisTankListLoading(false);
     };
     fetch();
   }, [tier]);
 
+  /** Price controller */
   useEffect(() => {
     handlePrice();
   }, [tier, targetMoe, actualMoePercent]);
@@ -105,51 +119,67 @@ export const FormMoe: React.FC<Props> = (props) => {
         if (actualMoePercent > 64) setactualMoePercent(64);
         break;
       }
-
       case "2": {
         setMaxActualMoePercent(84);
         if (actualMoePercent > 84) setactualMoePercent(84);
         break;
       }
-
       case "3": {
         setMaxActualMoePercent(94);
         break;
       }
-
       default:
         break;
     }
   }, [targetMoe]);
 
-  const submitForm = (e: any) => {
+  /** Submit form and create
+   * request to server
+   */
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (isNickCorrect && price > 0) {
-      const messageContent = {
+    if (validateForm()) {
+      const data = {
         email: email,
-        nickname: nick,
-        message: message,
+        nick: nick,
         price: price,
-        level: tier,
-        tankToMoe: tankName,
-        actualMoe: actualMoePercent,
-        tank: props.tankName,
+        selectedTank: tankName,
+        tier: tier,
+        target: targetMoe,
+        actualMoePercent: actualMoePercent,
+        optionalMessage: message,
+        type: props.type,
       };
 
-      setEmail("");
-      setNick("");
-      setMessage("");
-
-      console.log(messageContent);
-      alert("Wyslano wiadomosc");
+      setisEmailSending(true);
+      const response = await createRequest(data);
+      if (response?.status === 200) alert();
+      setisEmailSending(false);
+      clearForm();
     }
   };
 
+  /** Basic input validator */
   const validateForm = () => {
     if (isNickCorrect && price > 0 && nick.length > 2) return true;
     else return false;
   };
+
+  /** Clear form after submit */
+  const clearForm = () => {
+    setEmail("");
+    setNick("");
+    setMessage("");
+  };
+
+  const alert = () =>
+    toast({
+      title: "Wysłano maila!",
+      description: `${nick} przyjeliśmy twoje zgłoszenie, w ciągu 24h wystosujemy indywidualną ofertę.`,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
 
   return (
     <form onSubmit={submitForm}>
@@ -197,7 +227,7 @@ export const FormMoe: React.FC<Props> = (props) => {
               variant="filled"
               cursor="pointer"
             >
-              {Object.entries(tankList).map((e: any) => (
+              {tankList.map((e: any) => (
                 <option key={e[0]} value={e[1]?.name}>
                   {e[1]?.name}
                 </option>
@@ -270,6 +300,7 @@ export const FormMoe: React.FC<Props> = (props) => {
           _focus={{ outline: "none" }}
           type="submit"
           isDisabled={!validateForm()}
+          isLoading={isEmailSending}
         >
           Wyślij!
         </Button>

@@ -16,3 +16,12 @@ export const fetchTanks = async (tier: string) => {
   );
   return response?.data?.data;
 };
+
+export const createRequest = async (data: any) => {
+  try {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/contactform`, data);
+    return response;
+  } catch (err: any) {
+    console.log(err);
+  }
+};

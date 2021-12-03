@@ -7,7 +7,8 @@ import { FaPaperPlane } from "react-icons/fa";
 import { NationTabExtended } from "./NationTabExtended";
 import { NationTabList } from "./NationTabList";
 import { Mission, RequiredTank } from "../../types";
-import { fetchNickname } from "../../helpers/FetchHelpers";
+import { createRequest, fetchNickname } from "../../helpers/FetchHelpers";
+import { useToast } from "@chakra-ui/react";
 
 interface FormMissionsProps {
   tankName: string;
@@ -16,18 +17,23 @@ interface FormMissionsProps {
 }
 
 export const FormMissionsExtended: React.FC<FormMissionsProps> = (props) => {
+  /** Input state */
   const [price, setPrice] = useState(0);
   const [email, setEmail] = useState<string>("");
   const [nick, setNick] = useState("");
   const [message, setMessage] = useState("");
   const [selectedMissions, setSelectedMissions] = useState<string[]>([]);
+
+  /** Components controllers */
   const [timer, setTimer] = useState<any>(null);
   const [isNickCorrect, setIsNickCorrect] = useState<boolean>(true);
+  const [isEmailSending, setisEmailSending] = useState<boolean>(false);
+  const toast = useToast();
 
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
+  /** Check nick in Wot database
+   * function will start 1s after
+   * stop typing
+   */
   const handleNick = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 1) setIsNickCorrect(false);
     setNick(e.target.value);
@@ -39,36 +45,55 @@ export const FormMissionsExtended: React.FC<FormMissionsProps> = (props) => {
     );
   };
 
+  /** Basic inputs handlers */
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
   const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
 
-  const submitForm = (e: any) => {
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (isNickCorrect && price > 0) {
-      const messageContent = {
+    if (validateForm()) {
+      const data = {
         email: email,
-        nickname: nick,
-        message: message,
-        missions: selectedMissions,
+        nick: nick,
         price: price,
-        tank: props.tankName,
+        optionalMessage: message,
+        missions: selectedMissions,
+        type: props.tankName,
       };
 
-      setEmail("");
-      setNick("");
-      setMessage("");
-
-      console.log(messageContent);
-      alert("Wyslano wiadomosc");
+      setisEmailSending(true);
+      const response = await createRequest(data);
+      if (response?.status === 200) alert();
+      setisEmailSending(false);
+      clearForm();
     }
   };
 
+  /** Basic input validator */
   const validateForm = () => {
     if (isNickCorrect && price > 0 && nick.length > 2) return true;
     else return false;
   };
+
+  /** Clear form after submit */
+  const clearForm = () => {
+    setEmail("");
+    setNick("");
+    setMessage("");
+  };
+
+  const alert = () =>
+    toast({
+      title: "Wysłano maila!",
+      description: `${nick} przyjeliśmy twoje zgłoszenie, w ciągu 24h wystosujemy indywidualną ofertę.`,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
 
   return (
     <form onSubmit={submitForm}>
@@ -182,6 +207,7 @@ export const FormMissionsExtended: React.FC<FormMissionsProps> = (props) => {
           _focus={{ outline: "none" }}
           type="submit"
           isDisabled={!validateForm()}
+          isLoading={isEmailSending}
         >
           Wyślij!
         </Button>

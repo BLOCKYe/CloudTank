@@ -1,31 +1,36 @@
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Box, Container, SimpleGrid } from "@chakra-ui/layout";
-import { Button, Textarea, Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/react";
+import { Button, Textarea, Slider, SliderFilledTrack, SliderThumb, SliderTrack, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
 import { Prices } from "../../types";
-import { fetchNickname } from "../../helpers/FetchHelpers";
+import { createRequest, fetchNickname } from "../../helpers/FetchHelpers";
 
 interface Props {
-  tankName: string;
+  type: string;
   prices: Prices;
 }
 
 export const FormBoosting: React.FC<Props> = (props) => {
+  /** Input state */
   const [price, setPrice] = useState(0);
   const [email, setEmail] = useState<string>("");
   const [nick, setNick] = useState("");
   const [message, setMessage] = useState("");
-  const [timer, setTimer] = useState<any>(null);
-  const [isNickCorrect, setIsNickCorrect] = useState<boolean>(true);
   const [gameLevel, setGameLevel] = useState(2000);
   const [battlesCount, setBattlesCount] = useState(10);
 
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  /** Components controllers */
+  const [timer, setTimer] = useState<any>(null);
+  const [isNickCorrect, setIsNickCorrect] = useState<boolean>(true);
+  const [isEmailSending, setisEmailSending] = useState<boolean>(false);
+  const toast = useToast();
 
+  /** Check nick in Wot database
+   * function will start 1s after
+   * stop typing
+   */
   const handleNick = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 1) setIsNickCorrect(false);
     setNick(e.target.value);
@@ -37,47 +42,71 @@ export const FormBoosting: React.FC<Props> = (props) => {
     );
   };
 
+  /** Basic inputs handlers */
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
   const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
 
-  const submitForm = (e: any) => {
-    e.preventDefault();
-
-    if (isNickCorrect && price > 0) {
-      const messageContent = {
-        email: email,
-        nickname: nick,
-        message: message,
-        price: price,
-        level: gameLevel,
-        battles: battlesCount,
-        tank: props.tankName,
-      };
-
-      setEmail("");
-      setNick("");
-      setMessage("");
-
-      console.log(messageContent);
-      alert("Wyslano wiadomosc");
-    }
-  };
-
-  const validateForm = () => {
-    if (isNickCorrect && price > 0 && nick.length > 2) return true;
-    else return false;
-  };
-
+  /** Compute final price */
   const handlePrice = () => {
     if (gameLevel === 2000) setPrice(battlesCount * props.prices.Standard);
     else if (gameLevel === 3000) setPrice(battlesCount * props.prices.High);
     else if (gameLevel === 4000) setPrice(battlesCount * props.prices.Extreme);
   };
 
+  /** Price controller */
   useEffect(() => {
     handlePrice();
   }, [gameLevel, battlesCount]);
+
+  /** Submit form and create
+   * request to server
+   */
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (validateForm()) {
+      const data = {
+        email: email,
+        nick: nick,
+        price: price,
+        gameLevel: gameLevel,
+        battlesCount: battlesCount,
+        optionalMessage: message,
+        type: props.type,
+      };
+
+      setisEmailSending(true);
+      const response = await createRequest(data);
+      if (response?.status === 200) alert();
+      setisEmailSending(false);
+      clearForm();
+    }
+  };
+
+  /** Basic input validator */
+  const validateForm = () => {
+    if (isNickCorrect && price > 0 && nick.length > 2) return true;
+    else return false;
+  };
+
+  /** Clear form after submit */
+  const clearForm = () => {
+    setEmail("");
+    setNick("");
+    setMessage("");
+  };
+
+  const alert = () =>
+    toast({
+      title: "Wysłano maila!",
+      description: `${nick} przyjeliśmy twoje zgłoszenie, w ciągu 24h wystosujemy indywidualną ofertę.`,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
 
   return (
     <form onSubmit={submitForm}>
@@ -172,6 +201,7 @@ export const FormBoosting: React.FC<Props> = (props) => {
           _focus={{ outline: "none" }}
           type="submit"
           isDisabled={!validateForm()}
+          isLoading={isEmailSending}
         >
           Wyślij!
         </Button>
