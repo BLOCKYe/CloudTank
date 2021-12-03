@@ -165,8 +165,7 @@ export const FormMoe: React.FC<Props> = (props) => {
             <Input
               value={nick}
               onChange={handleNick}
-              borderColor={isNickCorrect && nick.length > 2 ? "green.300" : "gray.300"}
-              borderWidth={isNickCorrect && nick.length > 2 ? 2 : 1}
+              borderColor="gray.300"
               type="text"
               placeholder="Twój nick z gry"
               isInvalid={!isNickCorrect}
