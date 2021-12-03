@@ -18,8 +18,17 @@ export const fetchTanks = async (tier: string) => {
 };
 
 export const createRequest = async (data: any) => {
+  let config: any = {
+    method: "post",
+    url: `${process.env.NEXT_PUBLIC_API_URL}/api/contactform`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
   try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/contactform`, data);
+    const response = await axios(config);
     return response;
   } catch (err: any) {
     console.log(err);
