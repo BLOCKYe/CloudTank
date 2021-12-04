@@ -76,6 +76,15 @@ export const FormBoosting: React.FC<Props> = (props) => {
         battlesCount: battlesCount,
         optionalMessage: message,
         type: props.type,
+        content: `Oferta ${props.type} od gracza https://pl.wot-life.com/eu/player/${nick}.
+Email kontaktowy klienta: ${email}. 
+Dolecowy poziom gry: ${gameLevel} WN8.
+Zamówiona ilość bitew: ${battlesCount}
+
+Wiadomość od klienta: 
+${message}
+                          
+        Szacowana cena: ${price}`,
       };
 
       setisEmailSending(true);

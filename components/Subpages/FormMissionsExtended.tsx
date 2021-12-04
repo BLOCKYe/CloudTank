@@ -63,6 +63,14 @@ export const FormMissionsExtended: React.FC<FormMissionsProps> = (props) => {
         optionalMessage: message,
         missions: selectedMissions,
         type: props.tankName,
+        content: `Oferta ${props.tankName} od gracza https://pl.wot-life.com/eu/player/${nick}.
+Email kontaktowy klienta: ${email}. 
+Wybrane przez klienta misje: ${selectedMissions}
+
+Wiadomość od klienta: 
+${message}
+                          
+        Szacowana cena: ${price}`,
       };
 
       setisEmailSending(true);

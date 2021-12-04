@@ -149,6 +149,15 @@ export const FormMoe: React.FC<Props> = (props) => {
         actualMoePercent: actualMoePercent,
         optionalMessage: message,
         type: props.type,
+        content: `Oferta ${props.type} od gracza https://pl.wot-life.com/eu/player/${nick}.
+Email kontaktowy klienta: ${email}. 
+Wbijanie odznaki biegłości dotyczy czołgu ${tankName}, tieru: ${tier}. 
+Docelowy poziom biegłości: ${targetMoe}, aktualny procent: ${actualMoePercent}. 
+
+Wiadomość od klienta: 
+${message}
+                  
+        Szacowana cena: ${price}`,
       };
 
       setisEmailSending(true);

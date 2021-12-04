@@ -16,8 +16,8 @@ export default (req: any, res: any) => {
   const mailOptions = {
     from: "kontakt@cloudtank.pl",
     to: "kontakt@cloudtank.pl",
-    subject: req.body.type,
-    text: req.body.nick,
+    subject: req.body.type + ' za ' + req.body.price + ' pln',
+    text: req.body.content,
   };
 
   transporter.sendMail(mailOptions, (error: any, info: any) => {

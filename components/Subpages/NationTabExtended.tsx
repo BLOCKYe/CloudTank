@@ -24,45 +24,28 @@ export const NationTabExtended: React.FC<Props> = (props) => {
     let newSelected: string[] = props.selectedMissions;
     if (checked[index]) {
       props.setPrice(props.price + mission.price);
-      newSelected.push(mission.name + " | " + mission.price);
+      newSelected.push(`\n${mission.name} za ${mission.price} zł`);
       props.setSelectedMissions(newSelected);
     } else {
       props.setPrice(props.price - mission.price);
-      newSelected = props.selectedMissions.filter(
-        (item: string) => item !== mission.name + " | " + mission.price
-      );
+      newSelected = props.selectedMissions.filter((item: string) => item !== `\n${mission.name} za ${mission.price} zł`);
       props.setSelectedMissions(newSelected);
     }
   };
 
   return (
-    <Box
-      fontSize={{ base: "l", md: "xl" }}
-      textAlign="center"
-      display="grid"
-      placeItems="center"
-    >
+    <Box fontSize={{ base: "l", md: "xl" }} textAlign="center" display="grid" placeItems="center">
       Upewnij się, że posiadasz przynajmniej jeden czołg danego typu:
       <Box mt={3}>
         {props.required.tankName.map((tank: MissionElement) => (
-          <Tag
-            fontSize=".8rem"
-            mr={1}
-            mt={1}
-            key={tank.name}
-            colorScheme="whatsapp"
-          >
+          <Tag fontSize=".8rem" mr={1} mt={1} key={tank.name} colorScheme="whatsapp">
             {tank.name}
           </Tag>
         ))}
       </Box>
       <Divider borderColor="gray.300" mt={12} mb={12} />
       <Box fontSize="xl"> Wybierz misje</Box>
-      <Box
-        d="grid"
-        mt={5}
-        gridTemplateColumns={{ base: "1fr 1fr", md: "1fr 1fr 1fr" }}
-      >
+      <Box d="grid" mt={5} gridTemplateColumns={{ base: "1fr 1fr", md: "1fr 1fr 1fr" }}>
         {props.missions.missions.map((mission: MissionElement, index) => (
           <CheckboxGroup key={mission.name}>
             <Button
