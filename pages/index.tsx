@@ -13,17 +13,11 @@ import { FAQ } from "../components/MainPage/FAQ";
 import { Promotion, Feedback, FAQs } from "../types";
 
 export async function getStaticProps() {
-  const promoResponse = await axios.get(
-    `https://cloud-tank-server.herokuapp.com/promos`
-  );
+  const promoResponse = await axios.get(`https://cloud-tank-server.herokuapp.com/promos`);
 
-  const feedbackResponse = await axios.get(
-    `https://cloud-tank-server.herokuapp.com/feedbacks`
-  );
+  const feedbackResponse = await axios.get(`https://cloud-tank-server.herokuapp.com/feedbacks`);
 
-  const faqResponse = await axios.get(
-    `https://cloud-tank-server.herokuapp.com/faqs`
-  );
+  const faqResponse = await axios.get(`https://cloud-tank-server.herokuapp.com/faqs`);
 
   const promo = await promoResponse.data[0];
   const faq = await faqResponse.data;
@@ -69,14 +63,23 @@ const Home: NextPage<Props> = ({ promo, feedback, faq }) => {
         </SimpleGrid>
 
         <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.100" />
+
         <Offer />
+
         <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
-        <FAQ data={faq}/>
+
+        <FAQ data={faq} />
+
         <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
+
         <Contact />
+
         <Divider mt={{ base: 24, md: 24 }} borderColor="gray.300" />
+
         <Comments data={feedback} />
+
         <Divider mt={{ base: 12, xl: 24 }} borderColor="gray.300" />
+
         <Footer />
       </Box>
     </Box>
