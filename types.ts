@@ -62,6 +62,7 @@ export interface Promotion {
   label?: string;
   published_at?: Date;
   createdAt?: Date;
+  link?: string;
   updatedAt?: Date;
   __v?: number;
   id?: string;

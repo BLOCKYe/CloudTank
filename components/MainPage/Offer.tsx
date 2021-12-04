@@ -2,8 +2,13 @@ import React from "react";
 import { Box, Heading, Text } from "@chakra-ui/layout";
 import { OfferItem } from "./OfferItem";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import { useInView } from "react-intersection-observer";
 
 export const Offer: React.FC = () => {
+  const [titleRef, titleInView] = useInView({
+    triggerOnce: true,
+    rootMargin: "-100px 0px",
+  });
 
   const Offers = [
     {
@@ -131,7 +136,7 @@ export const Offer: React.FC = () => {
         />
       </Box>
 
-      <Tabs mt={24} isFitted variant="enclosed" w="100%">
+      <Tabs ref={titleRef} mt={24} isFitted variant="enclosed" w="100%">
         <TabList borderColor="gray.400" mb="1em">
           <Tab
             _selected={{
@@ -173,11 +178,9 @@ export const Offer: React.FC = () => {
         <TabPanels>
           <TabPanel display="grid" placeItems="center">
             <Box maxW="4xl" textAlign="center">
-              Kampania pierwszy front składa się z czterech operacji, z których
-              każda zawiera gałęzie misji dla wszystkich typów pojazdów. Każda
-              gałąź kampanii pierwszy front składa się z 15 misji. Oferta
-              dotyczy wybranych w formularzu misji. Czas wykonania usługi
-              zależny jest od ilości oraz trudności wybranych misji.
+              Kampania pierwszy front składa się z czterech operacji, z których każda zawiera gałęzie misji dla
+              wszystkich typów pojazdów. Każda gałąź kampanii pierwszy front składa się z 15 misji. Oferta dotyczy
+              wybranych w formularzu misji. Czas wykonania usługi zależny jest od ilości oraz trudności wybranych misji.
             </Box>
             <Box
               w="100%"
@@ -228,11 +231,9 @@ export const Offer: React.FC = () => {
 
           <TabPanel display="grid" placeItems="center">
             <Box maxW="4xl" textAlign="center">
-              Kampania Drugi front składa się z trzech operacji, z których każda
-              zawiera gałęzie misji dla pojazdów z formacji narodowych. Każda
-              gałąź kampanii Drugi front składa się z 15 misji. Oferta dotyczy
-              wybranych w formularzu misji. Czas wykonania usługi zależny jest
-              od ilości oraz trudności wybranych misji.
+              Kampania Drugi front składa się z trzech operacji, z których każda zawiera gałęzie misji dla pojazdów z
+              formacji narodowych. Każda gałąź kampanii Drugi front składa się z 15 misji. Oferta dotyczy wybranych w
+              formularzu misji. Czas wykonania usługi zależny jest od ilości oraz trudności wybranych misji.
             </Box>
             <Box
               w="100%"
@@ -276,9 +277,8 @@ export const Offer: React.FC = () => {
 
           <TabPanel display="grid" placeItems="center">
             <Box maxW="4xl" textAlign="center">
-              Zajmujemy się również realizacją różnego rodzaju zleceń,
-              specjalizujemy się w wbijaniu odznak biegłości, podnoszeniu
-              statystyk WN8 oraz szybkim badaniu czołgów.
+              Zajmujemy się również realizacją różnego rodzaju zleceń, specjalizujemy się w wbijaniu odznak biegłości,
+              podnoszeniu statystyk WN8 oraz szybkim badaniu czołgów.
             </Box>
             <Box
               w="100%"
