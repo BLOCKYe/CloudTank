@@ -8,26 +8,14 @@ import { Header } from '../components/MainPage/Header';
 import { Offer } from '../components/MainPage/Offer';
 import { Navbar } from '../components/Navbar';
 import { Promo } from '../components/MainPage/Promo';
-import axios from 'axios';
 import { FAQ } from '../components/MainPage/FAQ';
 import { Promotion, Feedback, FAQs } from '../types';
+import { FetchMainPage } from '../helpers/FetchStaticProps';
 
 export async function getStaticProps() {
-    const promoResponse = await axios.get(
-        `https://cloud-tank-server.herokuapp.com/promos`
-    );
-
-    const feedbackResponse = await axios.get(
-        `https://cloud-tank-server.herokuapp.com/feedbacks`
-    );
-
-    const faqResponse = await axios.get(
-        `https://cloud-tank-server.herokuapp.com/faqs`
-    );
-
-    const promo = await promoResponse.data[0];
-    const faq = await faqResponse.data;
-    const feedback = await feedbackResponse.data;
+    const promo = await FetchMainPage.promo();
+    const faq = await FetchMainPage.faq();
+    const feedback = await FetchMainPage.feedback();
     return { props: { promo, feedback, faq } };
 }
 

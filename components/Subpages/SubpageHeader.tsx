@@ -3,12 +3,12 @@ import { Text, Badge, Container, SimpleGrid } from '@chakra-ui/layout';
 import { Image } from '@chakra-ui/image';
 
 interface Props {
-    title: string;
-    desc: string;
-    label: string;
-    color: string;
-    image: string;
-    req: string;
+    title?: string;
+    desc?: string;
+    label?: string;
+    color?: string;
+    image?: string;
+    req?: string;
 }
 
 export const SubpageHeader: React.FC<Props> = (props) => {
@@ -20,9 +20,9 @@ export const SubpageHeader: React.FC<Props> = (props) => {
             columns={{ base: 1, md: 2 }}
         >
             <Container centerContent>
-                <Image maxW="300px" borderRadius="xl" src={props.image} />
+                <Image maxW="300px" borderRadius="xl" src={props?.image} />
                 <Text fontSize="xl" mt={5}>
-                    {props.title}
+                    {props?.title}
                 </Text>
             </Container>
 
@@ -31,11 +31,11 @@ export const SubpageHeader: React.FC<Props> = (props) => {
                 maxW="sm"
                 textAlign={{ base: 'center', md: 'start' }}
             >
-                <Badge mb={5} colorScheme={props.color}>
-                    {props.label}
+                <Badge mb={5} colorScheme={props?.color}>
+                    {props?.label}
                 </Badge>
-                <Text fontWeight="bold">{props.desc}</Text>
-                <Text mt={5}>{props.req}</Text>
+                <Text fontWeight="bold">{props?.desc}</Text>
+                <Text mt={5}>{props?.req}</Text>
             </Container>
         </SimpleGrid>
     );

@@ -7,13 +7,10 @@ import { FormMissionsExtended } from '../components/Subpages/FormMissionsExtende
 import axios from 'axios';
 import { Props } from '../types';
 import Head from 'next/head';
+import { FetchSubpages } from '../helpers/FetchStaticProps';
 
 export async function getStaticProps() {
-    const response = await axios.get(
-        `https://cloud-tank-server.herokuapp.com/t-28-concepts`
-    );
-
-    const data = await response.data[0];
+    const data = await FetchSubpages.T28Concept();
     return { props: { data } };
 }
 

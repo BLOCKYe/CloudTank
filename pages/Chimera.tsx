@@ -7,13 +7,10 @@ import { FormMissions } from '../components/Subpages/FormMissions';
 import axios from 'axios';
 import { Props } from '../types';
 import Head from 'next/dist/shared/lib/head';
+import { FetchSubpages } from '../helpers/FetchStaticProps';
 
 export async function getStaticProps() {
-    const response = await axios.get(
-        `https://cloud-tank-server.herokuapp.com/chimeras`
-    );
-
-    const data = await response.data[0];
+    const data = await FetchSubpages.chimera();
     return { props: { data } };
 }
 

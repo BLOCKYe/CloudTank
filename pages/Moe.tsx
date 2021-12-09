@@ -7,13 +7,10 @@ import axios from 'axios';
 import Head from 'next/head';
 import { MoeType } from '../types';
 import { FormMoe } from '../components/Subpages/FormMoe';
+import { FetchSubpages } from '../helpers/FetchStaticProps';
 
 export async function getStaticProps() {
-    const response = await axios.get(
-        `https://cloud-tank-server.herokuapp.com/moes`
-    );
-
-    const data = await response.data[0];
+    const data = await FetchSubpages.moe();
     return { props: { data } };
 }
 

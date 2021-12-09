@@ -4,16 +4,12 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { SubpageHeader } from '../components/Subpages/SubpageHeader';
 import { FormMissions } from '../components/Subpages/FormMissions';
-import axios from 'axios';
 import { Props } from '../types';
 import Head from 'next/head';
+import { FetchSubpages } from '../helpers/FetchStaticProps';
 
 export async function getStaticProps() {
-    const response = await axios.get(
-        `https://cloud-tank-server.herokuapp.com/object-279-s`
-    );
-
-    const data = await response.data[0];
+    const data = await FetchSubpages.obiekt279e();
     return { props: { data } };
 }
 
