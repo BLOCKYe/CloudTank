@@ -11,7 +11,7 @@ import { FetchSubpages } from '../helpers/FetchStaticProps';
 
 export async function getStaticProps() {
     const data = await FetchSubpages.T55A();
-    return { props: { data } };
+    return { props: { data }, revalidate: 600 };
 }
 
 export const T55A: React.FC<Props> = ({ data }) => {

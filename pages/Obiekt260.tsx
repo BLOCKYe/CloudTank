@@ -10,7 +10,7 @@ import { FetchSubpages } from '../helpers/FetchStaticProps';
 
 export async function getStaticProps() {
     const data = await FetchSubpages.obiekt260();
-    return { props: { data } };
+    return { props: { data }, revalidate: 600 };
 }
 
 export const Obiekt260: React.FC<Props> = ({ data }) => {

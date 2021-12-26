@@ -11,7 +11,7 @@ import { FetchSubpages } from '../helpers/FetchStaticProps';
 
 export async function getStaticProps() {
     const data = await FetchSubpages.chimera();
-    return { props: { data } };
+    return { props: { data }, revalidate: 600 };
 }
 
 export const Chimera: React.FC<Props> = ({ data }) => {

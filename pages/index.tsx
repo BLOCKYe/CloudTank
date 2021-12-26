@@ -16,7 +16,7 @@ export async function getStaticProps() {
     const promo = await FetchMainPage.promo();
     const faq = await FetchMainPage.faq();
     const feedback = await FetchMainPage.feedback();
-    return { props: { promo, feedback, faq } };
+    return { props: { promo, feedback, faq }, revalidate: 600 };
 }
 
 export interface Props {
