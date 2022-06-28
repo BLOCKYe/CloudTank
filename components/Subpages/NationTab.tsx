@@ -118,9 +118,10 @@ export const NationTab: React.FC<Props> = (props) => {
                                 colorScheme="gray"
                                 m={{ base: 1, md: 2 }}
                                 p={{ sm: 5, md: 7 }}
+                                onClick={()=> handleCheck(mission, index)}
                                 onChange={() => handleCheck(mission, index)}
                             >
-                                <Checkbox p={1} colorScheme="purple">
+                                <Checkbox p={1} colorScheme="purple" isChecked={checked[index]}>
                                     <Box
                                         fontSize={{
                                             base: '.7rem',
