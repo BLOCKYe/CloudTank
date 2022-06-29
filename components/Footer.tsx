@@ -12,6 +12,7 @@ export const Footer: React.FC = () => {
                     variant="outline"
                     leftIcon={<ImFacebook />}
                     borderColor="gray.300"
+                    disabled
                 >
                     Facebook
                 </Button>
@@ -20,12 +21,13 @@ export const Footer: React.FC = () => {
                     variant="outline"
                     leftIcon={<ImTwitter />}
                     borderColor="gray.300"
+                    disabled
                 >
                     Twitter
                 </Button>
             </ButtonGroup>
             <Text mt={5} mb={5} textAlign="center" fontSize=".8rem">
-                Copyright © CloudTank 2021
+                Copyright © CloudTank 2022
             </Text>
         </Container>
     );

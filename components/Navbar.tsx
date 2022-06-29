@@ -33,7 +33,7 @@ export const Navbar: React.FC = () => {
                     <Image
                         href="/"
                         h="40px"
-                        src="https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/logo.svg?alt=media&token=4fbd471b-9ae7-47b1-bb78-8a7861afc183"
+                        src="/logo.svg"
                         alt="cloud tank"
                     />
                 </Link>

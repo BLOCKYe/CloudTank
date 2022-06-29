@@ -10,7 +10,7 @@ interface Props {
 export const Header: React.FC<Props> = (props) => {
   return (
     <Box display="grid" placeItems={{ base: "center", xl: "unset" }} mt={12}>
-      <Heading>CLOUDTANK</Heading>
+      <Heading>CloudTank</Heading>
       <Text color="gray.600">World of tanks boosting</Text>
       {props.isDescription && (
         <Container
