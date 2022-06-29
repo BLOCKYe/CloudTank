@@ -14,7 +14,6 @@ export const OfferItem: React.FC<Props> = (props) => {
   return (
     <Link
       _focus={{ outline: "none" }}
-      target="_blank"
       style={{ textDecoration: "none" }}
       href={props.component}
     >
