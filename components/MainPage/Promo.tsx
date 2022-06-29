@@ -8,7 +8,7 @@ interface Props {
 
 export const Promo: React.FC<Props> = (props) => {
   return (
-    <Link _focus={{ outline: "none" }} target="_blank" style={{ textDecoration: "none" }} href={props.promo.link}>
+    <Link _focus={{ outline: "none" }} style={{ textDecoration: "none" }} href={props.promo.link}>
       <Container
         display="grid"
         placeItems={{ base: "center", xl: "start" }}
