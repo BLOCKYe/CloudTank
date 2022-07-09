@@ -23,7 +23,7 @@ export const Kampania: React.FC= () => {
             bg="gray.100"
         >
             <Head>
-                <title>CloudTank - Podnoszenie WN8</title>
+                <title>CloudTank - Kampania</title>
                 <meta name="description" content="World of tanks boosting" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
