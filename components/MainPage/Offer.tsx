@@ -92,6 +92,14 @@ export const Offer: React.FC = () => {
       image:
         "https://firebasestorage.googleapis.com/v0/b/fir-test-1e090.appspot.com/o/wn8.jpg?alt=media&token=cf6c4d3b-56bf-45e7-a649-fe89e51f74cb",
     },
+    {
+      title: "Czołg z kampanii",
+      label: "Kampania",
+      color: "yellow",
+      desc: "Zdobycie czołgu z nadchodzacej kampanii.",
+      component: "/Kampania",
+      image: "/Chief.jpg",
+    },
   ];
   return (
     <Box maxW="6xl" mt={12} w="100%" display="grid" placeItems="center">
@@ -313,6 +321,14 @@ export const Offer: React.FC = () => {
                   desc={Offers[8].desc}
                   color={Offers[8].color}
                   component={Offers[8].component}
+                />
+                <OfferItem
+                    title={Offers[9].title}
+                    label={Offers[9].label}
+                    image={Offers[9].image}
+                    desc={Offers[9].desc}
+                    color={Offers[9].color}
+                    component={Offers[9].component}
                 />
               </Box>
             </TabPanel>
